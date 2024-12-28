@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="container m-3">
+        <div class="register-card">
+            <h2 class="text-center mb-3">Register</h2>
+            <!-- Registration form -->
+            <form method="POST" action="" enctype="multipart/form-data">
+            <input type="hidden" name="register" value="1">
+                <!-- User registration form -->
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username"  >
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"  >
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="contact" name="contact"  >
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"  >
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"  >
+                    </div>
+                    <div class="mb-3" id="company_name_container" style="display: none;">
+                        <label for="company_name" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="company_name" name="company_name">
+                    </div>
+                    <div class="mb-3" id="company_address_container" style="display: none;">
+                        <label for="company_address" class="form-label">Company Address</label>
+                        <input type="text" class="form-control" id="company_address" name="company_address">
+                    </div>
+                    <div class="mb-3" id="company_website_container" style="display: none;">
+                        <label for="company_website" class="form-label">Company Website</label>
+                        <input type="url" class="form-control" id="company_website" name="company_website">
+                    </div>
+                    <div class="mb-3" id="contact_person_container" style="display: none;">
+                        <label for="contact_person" class="form-label">Contact Person</label>
+                        <input type="text" class="form-control" id="contact_person" name="contact_person">
+                    </div>
+                    <div class="mb-3" id="company_logo_container" style="display: none;">
+            <label for="company_logo" class="form-label">Company Logo</label>
+            <input type="file" class="form-control" id="company_logo" name="company_logo" accept="image/*">
+        </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select id="role" name="role" class="form-select"  >
+                            <option value="student">Student</option>
+                            <option value="company">Company</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-12">
+                        <a href="index.html" type="submit" class="btn btn-primary w-100">Register</a>
+                        <div class="text-center mt-3">
+                            <a href="index.html">Already have an account? Login here.</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+    var companyNameContainer = document.getElementById('company_name_container');
+    var companyAddressContainer = document.getElementById('company_address_container');
+    var companyWebsiteContainer = document.getElementById('company_website_container');
+    var contactPersonContainer = document.getElementById('contact_person_container');
+    var companyLogoContainer = document.getElementById('company_logo_container');
+
+    if (this.value === 'company') {
+        companyNameContainer.style.display = 'block';
+        companyAddressContainer.style.display = 'block';
+        companyWebsiteContainer.style.display = 'block';
+        contactPersonContainer.style.display = 'block';
+        companyLogoContainer.style.display = 'block';  // Show the logo input field
+    } else {
+        companyNameContainer.style.display = 'none';
+        companyAddressContainer.style.display = 'none';
+        companyWebsiteContainer.style.display = 'none';
+        contactPersonContainer.style.display = 'none';
+        companyLogoContainer.style.display = 'none';  // Hide the logo input field
+    }
+});
+
+    </script>
+
+</body>
+</html>

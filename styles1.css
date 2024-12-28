@@ -1,0 +1,212 @@
+/* General Styles */
+body {
+    background-color: #f9fafc;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+    /* Custom Navbar Styling */
+    .navbar {
+        background-color: #0066cc;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .nav-link {
+        color: white !important;
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+
+    /* Custom Dropdown Styling */
+    .nav-item.dropdown {
+        position: relative;
+    }
+
+    .custom-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white; /* Set dropdown background to white */
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(15px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        width: auto;
+        min-width: 200px; /* Minimum width for the dropdown */
+        max-width: 300px; /* Max width for larger text to fit */
+        z-index: 1050;
+    }
+
+    .nav-item:hover .custom-dropdown {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .custom-dropdown .dropdown-item {
+        color: #333; /* Text color for dropdown items */
+        padding: 12px 20px;
+        font-size: 15px;
+        border-bottom: 1px solid #f1f1f1;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        white-space: nowrap; /* Prevents text wrapping inside the dropdown */
+        overflow: hidden; /* Hides overflow text */
+        text-overflow: ellipsis; /* Add ellipsis (...) if the text overflows */
+    }
+    .custom-dropdown .dropdown-item:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+    .custom-dropdown .dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+
+    .custom-dropdown .dropdown-item i {
+        margin-right: 10px;
+    }
+
+    
+
+    .dropdown-menu a {
+        padding: 15px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+    }
+
+    
+
+    /* Responsive Design for smaller screens */
+    @media (max-width: 768px) {
+        .custom-dropdown {
+            position: relative;
+            top: 0;
+            right: auto;
+            box-shadow: none;
+            border-radius: 0;
+        }
+    }
+
+/* Search Bar */
+.search-bar {
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #0066cc;
+    font-size: 2rem;
+}
+h3 {
+    color: #0066cc;
+    font-size: 1.8rem;
+}
+.search-bar input {
+    border-radius: 20px;
+    border: 2px solid #cccccc;
+    padding: 20px 15px;
+    width: 70%;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #0066cc;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0, 102, 204, 0.2);
+}
+
+.search-bar button {
+    border-radius: 20px;
+    padding: 0px 20px;
+    background-color: #0066cc;
+    color: #ffffff;
+    font-size: 1.1rem;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #004d99;
+}
+
+/* Card Styles */
+.card {
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #004d99;
+}
+
+.card-text {
+    color: #666; /* Subtle text color for values */
+    text-align: justify; /* Justify the text */
+}
+
+
+.btn-primary {
+    background-color: #0066cc;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #ffffff;
+}
+
+
+
+.btn-primary:hover {
+    background-color: #004d99;
+}
+
+/* Footer */
+footer {
+    background-color: #0066cc;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 10px 10px 0 0;
+}
+
+
+/* Vacancy List Section */
+.vacancy-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.vacancy-list .vacancy-card {
+    flex: 1 1 calc(33% - 20px);
+    min-width: 300px;
+}
+

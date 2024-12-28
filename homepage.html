@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Recruitment System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        .vacancy-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+
+
+        .vacancy-image {
+            width: 50px;
+            /* Icon-like size */
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            /* Circular image */
+        }
+
+        .no-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 22px;
+            color: #0056b3;
+            font-weight: 600;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        p {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: #0066cc;
+            border: none;
+            color: #ffffff;
+        }
+
+
+
+        .card-details {
+            width: 100%;
+            border-collapse: collapse;
+            /* Removes spacing between cells */
+            margin: 10px 0;
+        }
+
+        .card-details td {
+            padding: 8px 10px;
+            vertical-align: top;
+        }
+
+        .card-details .label {
+            font-weight: bold;
+            color: #004d99;
+            /* Accent color for labels */
+            width: 40%;
+            /* Adjust the width for labels */
+        }
+
+        .card-details td:not(.label) {
+            color: #666;
+            /* Subtle text color for values */
+            text-align: left;
+            /* Align values to the left */
+        }
+
+        .p1 {
+            display: block;
+            /* Ensure it acts as a block element */
+            overflow: hidden;
+            /* Hide overflowing text */
+            text-overflow: ellipsis;
+            /* Add the ellipsis (...) */
+            white-space: nowrap;
+            /* Prevent wrapping */
+            max-width: 100%;
+            /* Ensure it respects the container's width */
+        }
+
+        /* Apply Modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand text-light" href="homepage.html">CampusHire</a>
+        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                      
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownFilters"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-sliders-h text-light"></i> Filters
+                            </a>
+                            <div class="dropdown-menu custom-dropdown p-3" aria-labelledby="navbarDropdownFilters"
+                                style="min-width: 240px;">
+
+                                <!-- <div class="dropdown-menu p-3" aria-labelledby="navbarDropdownFilters" style="min-width: 240px;"> -->
+                                <form method="GET" action="home.html">
+                                    <div class="form-group">
+                                        <label for="job_type">Job Type</label>
+                                        <select class="form-control" name="job_type" id="job_type">
+                                            <option value="">All Job Types</option>
+                                            <option value="Full-time">Full-time</option>
+                                            <option value="Part-time">Part-time</option>
+                                            <option value="Internship">Internship</option>
+                                            <option value="Contract">Contract</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <select class="form-control" name="location" id="location">
+                                            <option value="">All Locations</option>
+                                            <option value="New York">New York</option>
+                                            <option value="San Francisco">San Francisco</option>
+                                            <option value="Chicago">Chicago</option>
+                                            <option value="Remote">Remote</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="salary">Salary</label>
+                                        <select class="form-control" name="salary" id="salary">
+                                            <option value="">All Salaries</option>
+                                            <option value="Below ₹50k">Below ₹50k</option>
+                                            <option value="₹50k-₹100k">₹50k-₹100k</option>
+                                            <option value="Above ₹100k">Above ₹100k</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="experience">Experience</label>
+                                        <select class="form-control" name="experience" id="experience">
+                                            <option value="">All Experience</option>
+                                            <option value="Entry-level">Entry-level</option>
+                                            <option value="Mid-level">Mid-level</option>
+                                            <option value="Senior-level">Senior-level</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary w-100">Apply Filters</button>
+                                </form>
+                            </div>
+                        </li>
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownFilters"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user text-light"></i> Meet Ladola
+                            </a>
+
+                            <div class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="profile_view.html"><i class="fas fa-user"></i>
+                                    Profile</a>
+                                <a class="dropdown-item" href="resume_builder.html"><i class="fas fa-file-alt"></i>
+                                    Resume Builder</a>
+                                <a class="dropdown-item" href="student_application_history.html"><i
+                                        class="fas fa-history"></i> Application history </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="index.html">Logout <i
+                                    class="fa-solid fa-sign-out-alt text-light"></i></a>
+                        </li>
+                    </ul>
+                </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluied mt-4">
+        <!-- Search Bar -->
+        <div class="search-bar text-center">
+            <h3>Find Your Dream Job</h3>
+            <form class="d-flex justify-content-center mt-4" method="GET" action="home.html">
+                <input type="text" name="search" placeholder="Search for job titles, skills, or companies"
+                    class="form-control mr-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search text-light"></i> </button>
+            </form>
+        </div>
+
+        <div class="container-fluid mt-3">
+            <div class="featured-vacancies">
+                <h2 class="text-center mb-3">Career Opportunities</h2>
+                <div class="row">
+                    <!-- Vacancy Cards -->
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="vacancy-card">
+                                    <img src="frontend.png" alt="Vacancy Image" class="vacancy-image">
+                                    <h4 class="card-title">Software Engineer</h4>
+                                </div>
+                                <hr>
+                                <p class="mb-3 text-center" style="color:#333">
+                                    <i class="fas fa-briefcase" style="color: #0066cc;"> </i> Full-time &nbsp;
+                                    <i class="fas fa-map-marker-alt" style="color: #0066cc;"> </i> Surat
+                                </p>
+                                <table class="card-details">
+                                    <tr>
+                                        <td class="label">Experience:</td>
+                                        <td>2+ years</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Salary:</td>
+                                        <td>₹70k-₹90k</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Company:</td>
+                                        <td>TechCorp</td>
+                                    </tr>
+                                </table>
+                                <p class="card-text p1">Join our team and innovate the future of technology.</p>
+                                <p class="posted-date mt-3" style="color:#004d99">Posted on: 2024-12-01</p>
+                                <a href="vacancy-details.html" class="btn btn-primary mt-2 w-100">
+                                    <i class="fas fa-file-alt"></i> View Details
+                                </a>                            </div>
+                        </div>
+                    </div>
+                    <!-- Copy and modify this block for 8 cards -->
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="vacancy-card">
+                                    <img src="person_15140188.png" alt="Vacancy Image" class="vacancy-image">
+                                    <h4 class="card-title">Data Analyst</h4>
+                                </div>
+                                <hr>
+                                <p class="mb-3 text-center" style="color:#333">
+                                    <i class="fas fa-briefcase" style="color: #0066cc;"> </i> Part-time &nbsp;
+                                    <i class="fas fa-map-marker-alt" style="color: #0066cc;"> </i> New York
+                                </p>
+                                <table class="card-details">
+                                    <tr>
+                                        <td class="label">Experience:</td>
+                                        <td>1+ years</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Salary:</td>
+                                        <td>₹50k-₹65k</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Company:</td>
+                                        <td>TechCorp                                        </td>
+                                    </tr>
+                                </table>
+                                <p class="card-text p1">Analyze and interpret complex datasets to support business
+                                    goals.</p>
+                                <p class="posted-date mt-3" style="color:#004d99">Posted on: 2024-12-02</p>
+                                <a href="vacancy-details.html" class="btn btn-primary mt-2 w-100">
+                                    <i class="fas fa-file-alt"></i> View Details
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="vacancy-card">
+                                    <img src="designer (1).png" alt="Vacancy Image" class="vacancy-image">
+                                    <h4 class="card-title">UI/UX Designer</h4>
+                                </div>
+                                <hr>
+                                <p class="mb-3 text-center" style="color:#333">
+                                    <i class="fas fa-briefcase" style="color: #0066cc;"></i> Contract &nbsp;
+                                    <i class="fas fa-map-marker-alt" style="color: #0066cc;"></i> Amreli
+                                </p>
+                                <table class="card-details">
+                                    <tr>
+                                        <td class="label">Experience:</td>
+                                        <td>2-4 years</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Salary:</td>
+                                        <td>₹70k-₹85k</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Company:</td>
+                                        <td>Tabnine</td>
+                                    </tr>
+                                </table>
+                                <p class="card-text p1">Redefine user experience with creative designs.</p>
+                                <p class="posted-date mt-3" style="color:#004d99">Posted on: 2024-12-13</p>
+                                <a href="vacancy-details.html" class="btn btn-primary mt-2 w-100">
+                                    <i class="fas fa-file-alt"></i> View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="vacancy-card">
+                                    <img src="devops.png" alt="Vacancy Image" class="vacancy-image">
+                                    <h4 class="card-title">DevOps Engineer</h4>
+                                </div>
+                                <hr>
+                                <p class="mb-3 text-center" style="color:#333">
+                                    <i class="fas fa-briefcase" style="color: #0066cc;"></i> Full-time/Remote &nbsp;
+                                    <i class="fas fa-map-marker-alt" style="color: #0066cc;"></i> Rajkot
+                                </p>
+                                <table class="card-details">
+                                    <tr>
+                                        <td class="label">Experience:</td>
+                                        <td>4+ years</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Salary:</td>
+                                        <td>₹85k-₹110k</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Company:</td>
+                                        <td>Tabnine</td>
+                                    </tr>
+                                </table>
+                                <p class="card-text p1">Optimize systems for speed and scalability.</p>
+                                <p class="posted-date mt-3" style="color:#004d99">Posted on: 2024-12-14</p>
+                                <a href="vacancy-details.html" class="btn btn-primary mt-2 w-100">
+                                    <i class="fas fa-file-alt"></i> View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Events Section -->
+    <div class="container-fluid">
+        <div class="upcoming-events">
+            <h2 class="text-center mb-4">Upcoming Events</h2>
+            <div class="row">
+
+                <div class="col-md-3 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Web Development Workshop</h5>
+                            <hr>
+                            <table class="card-details">
+                                <tr>
+                                    <td class="label">Date:</td>
+                                    <td>2024-12-16</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Location:</td>
+                                    <td>New York</td>
+                                </tr>
+                            </table>
+                            <p class="card-text">Master the latest web development frameworks and techniques. Enhance your skills with hands-on practice and real-world projects.</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Cloud Computing Seminar</h5>
+                            <hr>
+                            <table class="card-details">
+                                <tr>
+                                    <td class="label">Date:</td>
+                                    <td>2024-12-18</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Location:</td>
+                                    <td>Seattle</td>
+                                </tr>
+                            </table>
+                            <p class="card-text">Understand the latest trends in cloud computing. Learn how cloud solutions can optimize your business operations and scalability.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Cybersecurity Bootcamp</h5>
+                            <hr>
+                            <table class="card-details">
+                                <tr>
+                                    <td class="label">Date:</td>
+                                    <td>2024-12-19</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Location:</td>
+                                    <td>Boston</td>
+                                </tr>
+                            </table>
+                            <p class="card-text">Learn to secure systems against cyber threats. Gain practical knowledge on protecting data, networks, and digital assets.</p>
+                        </div>
+                    </div>
+                </div>
+                
+               
+               
+                
+                <div class="col-md-3 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Blockchain Hackathon</h5>
+                            <hr>
+                            <table class="card-details">
+                                <tr>
+                                    <td class="label">Date:</td>
+                                    <td>2024-12-22</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Location:</td>
+                                    <td>Austin</td>
+                                </tr>
+                            </table>
+                            <p class="card-text">Develop blockchain applications and compete for prizes. Collaborate with like-minded developers to create innovative solutions using blockchain technology.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- Event Registration Modal -->
+    <div class="modal fade" id="eventRegistrationModal" tabindex="-1" role="dialog"
+        aria-labelledby="eventRegistrationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventRegistrationModalLabel">Register for Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventRegistrationForm">
+                        <div class="form-group">
+                            <label for="event_title">Event Title</label>
+                            <input type="text" class="form-control" id="event_title" name="event_title">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number</label>
+                            <input type="text" class="form-control" id="mobile" name="mobile" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-user-plus text-light"></i>
+                            Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="p-4">
+        <p>Copyright &copy; 2025 Campus Recruitment System. All rights reserved.</p>
+    </footer>
+
+
+    <!-- Script to handle event registration and modal display -->
+    <script>
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.addEventListener('click', function () {
+                const eventTitle = this.getAttribute('data-event-title');
+                document.getElementById('event_title').value = eventTitle;
+                $('#eventRegistrationModal').modal('show');
+            });
+        });
+
+        document.getElementById('eventRegistrationForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+            formData.append('event_id', document.querySelector('.register-event').getAttribute('data-event-id'));
+
+            fetch('register_event.html', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'Success') {
+                        alert('Registration successful!');
+                        $('#eventRegistrationModal').modal('hide');
+                    } else {
+                        alert('Registration failed: ' + data);
+                    }
+                });
+        });
+    </script>
+
+    <!-- Include necessary JS files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<style>
+    body {
+            font-family: Arial, sans-serif;
+        }
+
+    .sidebar {
+        padding: 15px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            background-color: #343a40;
+            color: #fff;
+            padding-top: 1rem;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.9rem 1.25rem;
+            font-size: 18px;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .navbar {
+            margin-left: 260px;
+            font-size: large;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+        hr{
+            background-color: white;
+        }
+        .navbar-nav.ms-auto {
+    margin-left: auto;
+}
+
+</style>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+
+
+<div class="sidebar text-center">
+<h4 class="text-center">CampusHire</h4><br>
+<a href="admin_dashboard.php"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+        <a href="student_management.php"><i class="fa-solid fa-user-graduate"></i> Manage Students</a>
+        <a href="company_management.php"><i class="fa-solid fa-building"></i> Manage Companies</a>
+        <!-- <a href="admin_profile.php"><i class="fa-solid fa-id-card"></i> Profile Management</a> -->
+        <a href="vacancies_management.php"><i class="fa-solid fa-briefcase"></i> Manage Vacancies</a>
+        <!-- <a href="admin_appications.php"><i class="fa-solid fa-file-alt"></i> Manage Applications</a> -->
+        <a href="admin_events.php"><i class="fa-solid fa-calendar-alt"></i> Manage Events</a>
+        <!-- <a href="admin_event_registration.php"><i class="fa-solid fa-clipboard-check"></i> Event Registration</a> -->
+        <a href="index.html" class="text-danger"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+   <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#"><i class="fas fa-user"></i> 
+                        <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

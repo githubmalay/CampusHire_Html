@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background: #343a40;
+            color: white;
+            overflow: auto;
+            transition: 0.3s;
+            z-index: 1000;
+            padding-top: 20px;
+            padding: 15px;
+
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: large;
+        }
+        .sidebar h4 {
+            text-align: center;
+        }
+
+        .sidebar.hidden {
+            left: -250px;
+        }
+        .navbar {
+            margin-left: 250px;
+            z-index: 1050;
+        }
+        .sidebar-toggle {
+            cursor: pointer;
+            font-size: 1.7rem;
+            margin-right: 15px;
+            display: none;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+            transition: margin-left 0.3s;
+        }
+        .content.compact {
+            margin-left: 0;
+        }
+        @media (max-width: 768px) {
+            
+            .sidebar {
+                left: -250px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+               
+
+            }
+            .sidebar a {
+           
+            color: black;
+            background-color: white;
+            
+        }
+        .sidebar {
+            color: black;
+            background-color: white;
+            padding-top: 75px;
+
+        }
+        .navbar {
+            margin-left: 0;
+        }
+        
+        .sidebar-toggle {
+                display: inline;
+            }
+        }
+       /* Existing styling */
+
+       .table thead th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            display: flex;
+            background-color: #f8f9fa;
+        }
+
+        .table-responsive {
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table td {
+            background-color: #f8f9fa;
+        }
+
+        .table .btn {
+            width: 80px;
+            margin: 2px;
+        }
+
+        .table .description {
+            max-width: 700px;
+            overflow: hidden;
+        }
+
+        /* General Button Styles */
+        .btn {
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Primary Action Buttons */
+        .btn-dark {
+            background-color: #343a40;
+            color: #FFFFFF;
+            border: none;
+            font-size: 1rem;
+            padding: 8px 15px;
+
+        }
+
+        .btn-dark:hover {
+            background-color: #343a40;
+            color: #FFFFFF;
+        }
+
+        /* Edit Buttons */
+        .btn-info {
+            background-color: #17A2B8;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #117A8B;
+            color: #FFFFFF;
+        }
+
+
+        /* View Applications Buttons */
+        .btn-purple {
+            background-color: #6F42C1;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        .btn-purple:hover {
+            background-color: #5A3191;
+            color: #FFFFFF;
+        }
+
+       
+        /* Apply Modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+        }
+        .card  {
+    flex: 1 1 30%;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 0px solid black;    
+ }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h4>CampusHire</h4>
+        <a href="admin_dashboard.html"><i class="fa-solid fa-chart-line" style="
+            padding-top: 34px;"></i> Dashboard</a>
+        <a href="student_management.html"><i class="fa-solid fa-user-graduate"></i> Manage Students</a>
+        <a href="company_management.html"><i class="fa-solid fa-building"></i> Manage Companies</a>
+        <a href="vacancies_management.html"><i class="fa-solid fa-briefcase"></i> Manage Vacancies</a>
+        <a href="admin_events.html"><i class="fa-solid fa-calendar-alt"></i> Manage Events</a>
+        <a href="index.html" class="text-danger"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid">
+            <span class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></span>
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#"><i class="fas fa-user"></i> Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="content" id="content">
+       
+        <div class="container mt-5 pt-2">
+            <div class="col-md-12 mt-1">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Vacancies</h2>
+                    <!-- <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addVacancyModal">Add Vacancy</button> -->
+                </div>
+                <div class="d-md-none">
+                    <div id="vacancy-card-container">
+                        <!-- Card for each vacancy -->
+                        <div class="card mb-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Software Engineer</strong>
+                                    <small class="text-muted d-block">TechCorp | Surat</small>
+                                </div>
+                                <img src="frontend.png" alt="Vacancy Image" class="rounded" width="70">
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Description:</strong> Join our team and innovate the future of technology.</p>
+                                <p><strong>Experience:</strong> 2+ years</p>
+                                <p><strong>Salary:</strong> ₹70k-₹90k</p>
+                                <p><strong>Job Type:</strong> Full-time</p>
+                                <p><strong>Date:</strong> 2024-12-01</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <a href="view_applications.html" class="btn btn-secondary  ">View Applications</a>
+                                <div>
+                                    <button class="btn btn-info  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger  ">Enable</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Repeat for other vacancies -->
+                        <div class="card mb-3">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>UI/UX Designer</strong>
+                                    <small class="text-muted d-block">Tabnine | Amreli</small>
+                                </div>
+                                <img src="designer (1).png" alt="Vacancy Image" class="rounded" width="70">
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Description:</strong> Redefine user experience with creative designs.</p>
+                                <p><strong>Experience:</strong> 2-4 years</p>
+                                <p><strong>Salary:</strong> ₹70k-₹85k</p>
+                                <p><strong>Job Type:</strong> Contract</p>
+                                <p><strong>Date:</strong> 2024-12-13</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <a href="view_applications.html" class="btn btn-secondary  ">View Applications</a>
+                                <div>
+                                    <button class="btn btn-info  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger  ">Enable</button>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Repeat for other vacancies -->
+                         <div class="card mb-3">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Data Analyst</strong>
+                                    <small class="text-muted d-block">TechCorp | New York</small>
+                                </div>
+                                <img src="person_15140188.png" alt="Vacancy Image" class="rounded" width="70">
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Description:</strong> Analyze and interpret complex datasets to support business goals.</p>
+                                <p><strong>Experience:</strong> 1+ years	s</p>
+                                <p><strong>Salary:</strong> ₹50k-₹65k</p>
+                                <p><strong>Job Type:</strong> Part-time	</p>
+                                <p><strong>Date:</strong> 2024-12-01</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <a href="view_applications.html" class="btn btn-secondary  ">View Applications</a>
+                                <div>
+                                    <button class="btn btn-info  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger  ">Enable</button>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Repeat for other vacancies -->
+                         <div class="card mb-3">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>DevOps Engineer	</strong>
+                                    <small class="text-muted d-block">Tabnine | Amreli</small>
+                                </div>
+                                <img src="devops.png" alt="Vacancy Image" class="rounded" width="70">
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Description:</strong> Optimize systems for speed and scalability.	</p>
+                                <p><strong>Experience:</strong> 4+ years</p>
+                                <p><strong>Salary:</strong> ₹85k-₹110k	</p>
+                                <p><strong>Job Type:</strong> Full-time/Remote	</p>
+                                <p><strong>Date:</strong> 2024-12-14</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <a href="view_applications.html" class="btn btn-secondary  ">View Applications</a>
+                                <div>
+                                    <button class="btn btn-info  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger  ">Enable</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more cards as needed -->
+                    </div>
+                </div>
+                
+        </div>
+        
+        
+           
+            <!-- Original Table for Desktop View -->
+            <div class="d-none d-md-block">
+                 <!-- Vacancies Section -->
+                
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Experience</th>
+                                <th>Salary</th>
+                                <th>Job Type</th>
+                                <th>Location</th>
+                                <th>Company</th>
+                                <th>Date</th>
+                                <th>Applications</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vacancy-table-body">
+                            <tr>
+                                <td><img src="frontend.png" alt="Vacancy Image" width="70"></td>
+                                <td>Software Engineer</td>
+                                <td>Join our team and innovate the future of technology.</td>
+                                <td>2+ years</td>
+                                <td>₹70k-₹90k</td>
+                                <td>Full-time</td>
+                                <td>Surat</td>
+                                <td>TechCorp</td>
+                                <td>2024-12-01</td>
+                                <td>
+                                    <a href="view_applications.html" class="btn btn-secondary">View</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info edit-vacancy-btn  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger text-light enable-btn  ">Enable</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="designer (1).png" alt="Vacancy Image" width="70"></td>
+                                <td>UI/UX Designer
+                                </td>
+                                <td>Redefine user experience with creative designs.
+
+                                </td>
+                                <td>2-4 years
+                                </td>
+                                <td>₹70k-₹85k</td>
+                                <td> Contract  
+
+                                </td>
+                                <td>  Amreli</td>
+                                <td>Tabnine</td>
+                                <td>2024-12-13</td>
+                                <td>
+                                    <a href="view_applications.html" class="btn btn-secondary">View</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info edit-vacancy-btn  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger text-light enable-btn  ">Enable</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="person_15140188.png" alt="Vacancy Image" width="70"></td>
+                                <td>Data Analyst
+                                    </td>
+                                <td>Analyze and interpret complex datasets to support business goals.
+
+                                </td>
+                                <td>1+ years</td>
+                                <td>₹50k-₹65k</td>
+                                <td>Part-time</td>
+                                <td>    New York
+
+                                </td>
+                                <td>TechCorp</td>
+                                <td>2024-12-01</td><td>
+                                    <a href="view_applications.html" class="btn btn-secondary">View</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info edit-vacancy-btn  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger text-light enable-btn  ">Enable</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="devops.png" alt="Vacancy Image" width="70"></td>
+                                <td>DevOps Engineer
+                                </td>
+                                <td>Optimize systems for speed and scalability.
+
+                                    </td>
+                                <td>4+ years</td>
+                                <td>₹85k-₹110k</td>
+                                <td>Full-time/Remote</td>
+                                <td>Rajkot</td>
+                                <td>Tabnine</td>
+                                <td>2024-12-14</td><td>
+                                    <a href="view_applications.html" class="btn btn-secondary">View</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info edit-vacancy-btn  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                                    <button class="btn btn-danger text-light enable-btn  ">Enable</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Vacancy Modal -->
+        <div class="modal fade" id="editVacancyModal" tabindex="-1" aria-labelledby="editVacancyModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editVacancyModalLabel">Edit Vacancy</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editVacancyForm">
+                            <input type="hidden" id="editVacancyId" name="vacancy_id">
+                            <div class="mb-3">
+                                <label for="editVacancyImage" class="form-label">Vacancy Image</label>
+                                <input type="file" class="form-control" id="editVacancyImage" name="vacancy_image" accept="image/*">
+                                <small class="form-text text-muted">If you want to change the image, upload a new one.</small>
+                            </div>
+                            <div class="row">
+    
+                                <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editVacancyTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="editVacancyTitle" name="vacancyTitle" required>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label for="editVacancyExperience" class="form-label">Experience</label>
+                                <input type="text" class="form-control" id="editVacancyExperience" name="vacancyExperience" required>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="row">
+    
+                                <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editVacancySalary" class="form-label">Salary</label>
+                                <input type="text" class="form-control" id="editVacancySalary" name="vacancySalary" required>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editVacancyLocation" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="editVacancyLocation" name="vacancyLocation" required>
+                            </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editVacancyJobType" class="form-label">Job Type</label>
+                                <select class="form-control" id="editVacancyJobType" name="vacancyJobType" required>
+                                    <option value="Full Time/Office">Full Time/Office</option>
+                                    <option value="Full Time/Remote">Full Time/Remote</option>
+                                    <option value="Part Time/Office">Part Time/Office</option>
+                                    <option value="Part Time/Remote">Part Time/Remote</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editVacancyDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="editVacancyDescription" name="vacancyDescription" rows="2" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary p-2 fs-6 w-100">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Add Vacancy Modal -->
+            <div class="modal fade" id="addVacancyModal" tabindex="-1" aria-labelledby="addVacancyModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addVacancyModalLabel">Add Vacancy</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="add_vacancy.php" enctype="multipart/form-data">
+                                <div class="mb-2">
+                                    <label for="vacancyImage" class="form-label">Upload Image</label>
+                                    <input type="file" class="form-control" id="vacancyImage" name="vacancy_image" accept="image/*">
+                                </div>
+                                <div class="row">
+    
+                                <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="vacancyTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="vacancyTitle" name="title" required>
+                                </div>
+                                </div>
+                                
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="experience" class="form-label">Experience</label>
+                                            <input type="text" class="form-control" id="experience" name="experience" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="salary" class="form-label">Salary</label>
+                                            <input type="text" class="form-control" id="salary" name="salary" required pattern="^₹\d+(\sLPA)?\s-\s₹\d+(\sLPA)?$"
+                                                title="Enter salary in the format ₹6 LPA - ₹10 LPA">
+                                        </div>
+                                    </div>
+                               
+    <div class="col-md-6">
+    <div class="mb-3">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" class="form-control" id="location" name="location" required>
+                                </div>
+    </div>
+    </div>
+    
+    
+    
+                                
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="2" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="jobType" class="form-label">Job Type</label>
+                                    <select class="form-control" id="jobType" name="job_type" required>
+                                        <option value="" disabled selected>Select Job Type</option>
+                                        <option value="Full Time/Office">Full Time/Office</option>
+                                        <option value="Full Time/Remote">Full Time/Remote</option>
+                                        <option value="Part Time/Office">Part Time/Office</option>
+                                        <option value="Part Time/Remote">Part Time/Remote</option>
+                                    </select>
+                                </div>
+                                    <div class="mb-3">
+                                        <label for="companySelect" class="form-label">Company</label>
+                                        <select class="form-control" id="companySelect" name="company_id" required>
+                                     
+                                        </select>
+                                    </div>
+    
+    
+    
+                                <button type="submit" class="btn btn-primary p-2 fs-6 w-100">Add Vacancy</button>
+                            </form>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Edit Vacancy Button Click Event
+        $(document).on('click', '.edit-vacancy-btn', function() {
+            var vacancyTitle = $(this).closest('tr').find('td:eq(1)').text();
+            var vacancyDescription = $(this).closest('tr').find('td:eq(2)').text();
+            var vacancyExperience = $(this).closest('tr').find('td:eq(3)').text();
+            var vacancySalary = $(this).closest('tr').find('td:eq(4)').text();
+            var vacancyLocation = $(this).closest('tr').find('td:eq(5)').text();
+            var vacancyJobType = $(this).closest('tr').find('td:eq(6)').text();
+
+            // Set values to the modal form
+            $('#editVacancyTitle').val(vacancyTitle);
+            $('#editVacancyDescription').val(vacancyDescription);
+            $('#editVacancyExperience').val(vacancyExperience);
+            $('#editVacancySalary').val(vacancySalary);
+            $('#editVacancyLocation').val(vacancyLocation);
+            $('#editVacancyJobType').val(vacancyJobType);
+        });
+
+        // Add Vacancy Form Submission
+        $('#addVacancyForm').on('submit', function(e) {
+            e.preventDefault();
+            var newVacancy = {
+                title: $('#addVacancyTitle').val(),
+                description: $('#addVacancyDescription').val(),
+            };
+            // Add new vacancy to the table (for demonstration purposes)
+            var newRow = `
+                <tr>
+                    <td><img src="frontend.png" alt="Vacancy Image" width="70"></td>
+                    <td>${newVacancy.title}</td>
+                    <td>${newVacancy.description}</td>
+                    <td>2+ years</td>
+                    <td>₹70k-₹90k</td>
+                    <td>Full-time</td>
+                    <td>Surat</td>
+                    <td>TechCorp</td>
+                    <td>2024-12-01</td>
+                    <td>
+                        <button class="btn btn-info edit-vacancy-btn  " data-bs-toggle="modal" data-bs-target="#editVacancyModal">Edit</button>
+                        <button class="btn btn-danger text-light enable-btn  ">Enable</button>
+                    </td>
+                </tr>
+            `;
+            $('#vacancy-table-body').append(newRow);
+            $('#addVacancyModal').modal('hide');
+        });
+
+        // Enable Vacancy button (just for visual toggle)
+        $(document).on('click', '.enable-btn', function() {
+            var button = $(this);
+            if (button.text() === "Enable") {
+                button.removeClass('btn-danger').addClass('btn-success').text('Disable');
+            } else {
+                button.removeClass('btn-success').addClass('btn-danger').text('Enable');
+            }
+        });
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+  
+   
+       
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const overlay = document.getElementById('overlay');
+        const content = document.getElementById('content');
+
+        sidebarToggle.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            } else {
+                sidebar.classList.toggle('hidden');
+                content.classList.toggle('compact');
+            }
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
+  
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

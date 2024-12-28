@@ -1,0 +1,239 @@
+body {
+    background: #f0f2f5;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+    .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            padding-top: 1rem;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            font-size: 16px;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .navbar {
+            margin-left: 250px;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    flex: 1 1 30%;
+    margin: 10px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 0px solid black;
+}
+
+
+
+.dashboard-card .card-body {
+    display: flex;
+    align-items: center;
+    /* gap: 2rem; */
+}
+
+h2 {
+    color:  #343a40;
+
+}
+
+.card-icon {
+    font-size: 3.2rem;
+    color:  #343a40;
+    margin-right: 13px;
+    /* gap: 5rem; */
+    display: flex;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color:  #343a40;
+
+}
+
+.card-text {
+    font-size: 1.18rem;
+    color:  #343a40;
+    font-weight: 600;
+}
+
+.count {
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .dashboard-card {
+        flex: 1 1 100%;
+    }
+}
+
+
+
+
+/* Center the "Registered Users" text */
+.navbar-nav.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    /* Adjust color if needed */
+}
+
+
+
+
+.table thead th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+body {
+    display: flex;
+    background-color: #f8f9fa;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.table-responsive {
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table td {
+    background-color: #f8f9fa;
+}
+
+.table .btn {
+    width: 80px;
+    margin: 2px;
+}
+
+.table .description {
+    max-width: 700px;
+    overflow: hidden;
+}
+
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.card-header {
+    background-color: #343a40;
+    color: #f4f4f4;
+}
+
+/* Pagination Styles */
+.pagination-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.pagination .page-item .page-link {
+    color:  #343a40;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pagination .page-item .page-link:hover {
+    background-color:  #343a40;
+    color: white;
+    box-shadow: 0px 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #343a40;
+    color: white;
+    box-shadow: 0px 6px 12px rgba(0, 86, 179, 0.3);
+    pointer-events: none;
+}
+
+.pagination .page-item .page-link:focus {
+    outline: none;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); */
+}

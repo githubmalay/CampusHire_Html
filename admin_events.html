@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background: #343a40;
+            color: white;
+            overflow: auto;
+            transition: 0.3s;
+            z-index: 1000;
+            padding-top: 20px;
+            padding: 15px;
+
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: large;
+        }
+        .sidebar h4 {
+            text-align: center;
+        }
+
+        .sidebar.hidden {
+            left: -250px;
+        }
+        .navbar {
+            margin-left: 250px;
+            z-index: 1050;
+        }
+        .sidebar-toggle {
+            cursor: pointer;
+            font-size: 1.7rem;
+            margin-right: 15px;
+            display: none;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+            transition: margin-left 0.3s;
+        }
+        .content.compact {
+            margin-left: 0;
+        }
+        @media (max-width: 768px) {
+            
+            .sidebar {
+                left: -250px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+               
+
+            }
+            .sidebar a {
+           
+            color: black;
+            background-color: white;
+            
+        }
+        .sidebar {
+            color: black;
+            background-color: white;
+            padding-top: 75px;
+
+        }
+        .navbar {
+            margin-left: 0;
+        }
+        
+        .sidebar-toggle {
+                display: inline;
+            }
+        }
+       /* Existing styling */
+
+       .table thead th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            display: flex;
+            background-color: #f8f9fa;
+        }
+
+        .table-responsive {
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table td {
+            background-color: #f8f9fa;
+        }
+
+        .table .btn {
+            width: 80px;
+            margin: 2px;
+        }
+
+        .table .description {
+            max-width: 700px;
+            overflow: hidden;
+        }
+
+        /* General Button Styles */
+        .btn {
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Primary Action Buttons */
+        .btn-dark {
+            background-color: #343a40;
+            color: #FFFFFF;
+            border: none;
+            font-size: 1rem;
+            padding: 8px 15px;
+
+        }
+
+        .btn-dark:hover {
+            background-color: #343a40;
+            color: #FFFFFF;
+        }
+
+        /* Edit Buttons */
+        .btn-info {
+            background-color: #17A2B8;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #117A8B;
+            color: #FFFFFF;
+        }
+
+
+        /* View Applications Buttons */
+        .btn-purple {
+            background-color: #6F42C1;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        .btn-purple:hover {
+            background-color: #5A3191;
+            color: #FFFFFF;
+        }
+
+       
+        /* Apply Modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+        }
+        .card  {
+    flex: 1 1 30%;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 0px solid black;    
+ }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h4>CampusHire</h4>
+        <a href="admin_dashboard.html"><i class="fa-solid fa-chart-line" style="
+            padding-top: 34px;"></i> Dashboard</a>
+        <a href="student_management.html"><i class="fa-solid fa-user-graduate"></i> Manage Students</a>
+        <a href="company_management.html"><i class="fa-solid fa-building"></i> Manage Companies</a>
+        <a href="vacancies_management.html"><i class="fa-solid fa-briefcase"></i> Manage Vacancies</a>
+        <a href="admin_events.html"><i class="fa-solid fa-calendar-alt"></i> Manage Events</a>
+        <a href="index.html" class="text-danger"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid">
+            <span class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></span>
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#"><i class="fas fa-user"></i> Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="content" id="content">
+       
+        <div class="container mt-5 pt-2">
+            <div class="row mb-3 align-items-center">
+                <div class="col-6">
+                    <h2 class="h2">Manage Events</h2> <!-- Adjusted heading size for better fit -->
+                </div>
+                <div class="col-6 text-end">
+                    <a href="add_event.html" class="btn btn-dark btn-sm">Add Event</a> <!-- Used `btn-sm` for smaller button on mobile -->
+                </div>
+            </div>
+        </div>
+        
+        
+            <!-- Cards for Mobile View -->
+            <div class="row d-md-none">
+                <div class="col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Web Development Workshop</h5>
+                            <p class="card-text"><strong>Description:</strong> Master the latest web development frameworks and techniques. Enhance your skills with hands-on practice and real-world projects.</p>
+                            <p class="card-text"><strong>Date:</strong> 2024-12-16</p>
+                            <p class="card-text"><strong>Location:</strong> New York</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#registrationsModal" data-event-title="Web Development Workshop">View</button>
+                                <button class="btn btn-danger btn-sm toggle-status" data-status="enabled">Enable</button>
+                                <div>
+                                    <a href="edit_event.html" class="btn btn-info btn-sm text-light">Edit</a>
+                                    <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Repeat similar cards for other events -->
+                <div class="col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cloud Computing Seminar</h5>
+                            <p class="card-text"><strong>Description:</strong> Understand the latest trends in cloud computing. Learn how cloud solutions can optimize your business operations and scalability.</p>
+                            <p class="card-text"><strong>Date:</strong> 2024-12-19</p>
+                            <p class="card-text"><strong>Location:</strong> Boston</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#registrationsModal" data-event-title="Cloud Computing Seminar">View</button>
+                                <button class="btn btn-success btn-sm toggle-status" data-status="enabled">Disable</button>
+                                <div>
+                                    <a href="edit_event.html" class="btn btn-info btn-sm text-light">Edit</a>
+                                    <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cybersecurity Bootcamp</h5>
+                            <p class="card-text"><strong>Description:</strong> Learn to secure systems against cyber threats. Gain practical knowledge on protecting data, networks, and digital assets.</p>
+                            <p class="card-text"><strong>Date:</strong> 2024-12-18	</p>
+                            <p class="card-text"><strong>Location:</strong> Seattle</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#registrationsModal" data-event-title="Cloud Computing Seminar">View</button>
+                                <button class="btn btn-success btn-sm toggle-status" data-status="enabled">Disable</button>
+                                <div>
+                                    <a href="edit_event.html" class="btn btn-info btn-sm text-light">Edit</a>
+                                    <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Blockchain Hackathon</h5>
+                            <p class="card-text"><strong>Description:</strong> Develop blockchain applications and compete for prizes. Collaborate with like-minded developers to create innovative solutions using blockchain technology.</p>
+                            <p class="card-text"><strong>Date:</strong> 2024-12-22	</p>
+                            <p class="card-text"><strong>Location:</strong> Austin</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#registrationsModal" data-event-title="Cloud Computing Seminar">View</button>
+                                <button class="btn btn-success btn-sm toggle-status" data-status="enabled">Enable</button>
+                                <div>
+                                    <a href="edit_event.html" class="btn btn-info btn-sm text-light">Edit</a>
+                                    <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Original Table for Desktop View -->
+            <div class="d-none d-md-block">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Registrations</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+               
+                        <tr>
+                            <td>Web Development Workshop         </td>
+                            <td>Master the latest web development frameworks and techniques. Enhance your skills with hands-on practice and real-world projects.
+
+                                </td>
+                            <td>2024-12-16
+                            </td>
+                            <td>New York
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary text-light" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#registrationsModal" 
+                                        data-event-title="<?= htmlspecialchars($event['title']); ?>">
+                                    View 
+                                </button>
+                            </td>
+                            <td><button class="btn btn-danger toggle-status" data-status="enabled">Enable</button></td>
+                            <td>
+                                <a href="edit_event.html" class="btn btn-info text-light btn-sm">Edit</a>
+                                <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                            </td>
+                        </tr>   
+                        
+                        <tr>
+                            <td>Cloud Computing Seminar                            </td>
+                            <td>Understand the latest trends in cloud computing. Learn how cloud solutions can optimize your business operations and scalability.
+                                </td>
+                            <td>2024-12-19
+
+                            </td>
+                            <td>Boston
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary text-light" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#registrationsModal" 
+                                        data-event-title="<?= htmlspecialchars($event['title']); ?>">
+                                    View 
+                                </button>
+                            </td>
+                            <td><button class="btn btn-danger toggle-status" data-status="enabled">Enable</button></td>
+                            <td>
+                                <a href="edit_event.html" class="btn btn-info text-light btn-sm">Edit</a>
+                                <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>Cybersecurity Bootcamp
+                            </td>
+                            <td>Learn to secure systems against cyber threats. Gain practical knowledge on protecting data, networks, and digital assets.
+
+
+
+                                </td>
+                            <td>2024-12-18
+
+                            </td>
+                            <td>Seattle
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary text-light" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#registrationsModal" 
+                                        data-event-title="<?= htmlspecialchars($event['title']); ?>">
+                                    View 
+                                </button>
+                            </td>
+
+                                
+                                <td><button class="btn btn-danger toggle-status" data-status="enabled">Enable</button></td>
+
+                            </td>
+                            <td>
+                                <a href="edit_event.html" class="btn btn-info text-light btn-sm">Edit</a>
+                                <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                            </td>
+                        </tr>        
+                        <tr>
+                            <td>Blockchain Hackathon
+                            </td>
+                            <td>Develop blockchain applications and compete for prizes. Collaborate with like-minded developers to create innovative solutions using blockchain technology.
+
+
+
+
+
+                                </td>
+                            <td>2024-12-22
+                            </td>
+                            <td>Austin
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary text-light" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#registrationsModal" 
+                                        data-event-title="<?= htmlspecialchars($event['title']); ?>">
+                                    View 
+                                </button>
+                            </td>
+
+                                
+                                <td><button class="btn btn-danger toggle-status" data-status="enabled">Enable</button></td>
+
+                            </td>
+                            <td>
+                                <a href="edit_event.html" class="btn btn-info text-light btn-sm">Edit</a>
+                                <a href="delete_event.html" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                            </td>
+                        </tr>               
+            </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+    <!-- Registrations Modal -->
+    <div class="modal fade" id="registrationsModal" tabindex="-1" aria-labelledby="registrationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Event Registrations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>meet</td>
+                                <td>meet@gmail.com</td>
+                                <td>1235666355</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+  
+   
+       
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const overlay = document.getElementById('overlay');
+        const content = document.getElementById('content');
+
+        sidebarToggle.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            } else {
+                sidebar.classList.toggle('hidden');
+                content.classList.toggle('compact');
+            }
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
+    <script>
+        // Toggle Enable/Disable Event Status
+  $('.toggle-status').on('click', function() {
+            const button = $(this); // Get the clicked button
+            const currentStatus = button.data('status'); // Get the current status (enabled or disabled)
+            
+            // Toggle the button's status and appearance
+            if (currentStatus === 'enabled') {
+                button.removeClass('btn-danger').addClass('btn-success');
+                button.text('Disable');
+                button.data('status', 'disabled'); // Change the status to 'disabled'
+            } else {
+                button.removeClass('btn-success').addClass('btn-danger');
+                button.text('Enable');
+                button.data('status', 'enabled'); // Change the status to 'enabled'
+            }
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

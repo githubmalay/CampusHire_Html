@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacancy Detail</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        .btn-primary {
+            background-color: #0056b3;
+            border-radius: 25px;
+            padding: 12px 24px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #004d99;
+        }
+
+        /* Vacancy Card */
+        .vacancy-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .vacancy-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .vacancy-card h2 {
+            font-size: 2.2rem;
+            color: #004d99;
+            font-weight: 600;
+            border-bottom: 3px solid #0056b3;
+            padding-bottom: 10px;
+        }
+
+        strong {
+            color: #0056b3;
+        }
+
+        .vacancy-card p {
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .vacancy-card .btn {
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+
+
+        .career-sidebar h2 {
+            font-size: 1.5rem;
+            color: #0056b3;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .vacancy-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .vacancy-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .vacancy-item .list-group-item-heading {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .vacancy-item .vacancy-details {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Apply Modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-body {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+        }
+
+        .related-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            max-width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .btn-secondary {
+            background-color: #0056b3;
+            border-radius: 15px;
+            padding: 8px 10px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #004d99;
+        }
+
+        .vacancy-image {
+            width: 70px;
+            /* Icon size */
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            /* Circular image */
+            /* border: 2px solid #007bff; */
+        }
+
+        .no-image {
+            width: 70px;
+            height: 70px;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 12px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark px-3">
+        <a class="navbar-brand text-light" href="homepage.html">CampusHire</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownFilters"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user text-light"></i> Meet Ladola
+                    </a>
+
+                    <div class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="profile_view.html"><i class="fas fa-user"></i>
+                            Profile</a>
+                        <a class="dropdown-item" href="resume_builder.html"><i class="fas fa-file-alt"></i>
+                            Resume Builder</a>
+                        <a class="dropdown-item" href="student_application_history.html"><i
+                                class="fas fa-history"></i> Application history </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="logout.php">Logout <i class="fa-solid fa-sign-out-alt"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row mx-0 mx-lg-4">
+
+            <!-- Main Content Area -->
+            <div class="col-md-9 mt-2">
+                <div class="vacancy-card">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="mb-0">Data Analyst</h2>
+                        <img src="person_15140188.png" alt="Vacancy Image" class="vacancy-image">
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mt-3">
+                            <p><strong>Experience: </strong> 1+ years </p>
+                            <p><strong>Salary: </strong> ₹50k-₹65k</p>
+                            <p><strong>Job Type:</strong> Part-time </p>
+                            <p><strong>Location:</strong> New York</p>
+
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <p><strong>Company:</strong> DataCorp</p>
+                            <p><strong>Posted on:</strong> 2024-12-02</p>
+
+
+                        </div>
+                    </div>
+                    <p><strong>Description: </strong> Analyze and interpret complex datasets to support business
+                        goals.</p>
+                    <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#applyModal">Apply
+                        Now</button>
+                </div>
+            </div>
+
+            <!-- Career Opportunities Sidebar -->
+            <div class="col-md-3">
+                <div class="career-sidebar">
+                    <h2 class="text-center mb-3">Explore More Jobs</h2>
+                    <div class="list-group">
+                        <div class="related-card">
+                            <div>
+                                <h5 class="list-group-item-heading" style="color: #0056b3;">Software Engineer</h5>
+                                <p class="text-muted vacancy-details">TechCorp</p>
+                                <p class="vacancy-details">
+                                    <i class="fas fa-map-marker-alt" style="color: #0056b3;"></i> Surat |
+                                    <i class="fas fa-briefcase" style="color: #0056b3;"></i> Full-time
+                                </p>
+                            </div>
+
+                            <a href="#" class="btn btn-secondary btn-sm w-100">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </a>
+                        </div>
+                        <div class="related-card">
+                            <div>
+                                <h5 class="list-group-item-heading" style="color: #0056b3;">DevOps Engineer</h5>
+                                <p class="text-muted vacancy-details">TechCorp</p>
+                                <p class="vacancy-details">
+                                    <i class="fas fa-map-marker-alt" style="color: #0056b3;"></i> Rajkot |
+                                    <i class="fas fa-briefcase" style="color: #0056b3;"></i> Full-time/Remote
+                                </p>
+                            </div>
+
+                            <a href="#" class="btn btn-secondary btn-sm w-100">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </a>
+                        </div>
+                        <div class="related-card">
+                            <div>
+                                <h5 class="list-group-item-heading" style="color: #0056b3;">UI/UX Designer</h5>
+                                <p class="text-muted vacancy-details">TechCorp</p>
+                                <p class="vacancy-details">
+                                    <i class="fas fa-map-marker-alt" style="color: #0056b3;"></i> Amreli |
+                                    <i class="fas fa-briefcase" style="color: #0056b3;"></i> Contract
+                                </p>
+                            </div>
+
+                            <a href="#" class="btn btn-secondary btn-sm w-100">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Apply Modal -->
+    <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document" style="max-width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applyModalLabel">Apply for Data Analyst
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required
+                                value="Meet Ladola">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" required
+                                value="Meet@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="cover_letter">Cover Letter</label>
+                            <textarea class="form-control" id="cover_letter" name="cover_letter" rows="2"
+                                required></textarea>
+                        </div>
+                        <!-- Resume field: show current resume if exists -->
+                        <div class="form-group">
+                            <label for="resume">Resume (PDF file)</label>
+                            <p>Current Resume: <a style="text-decoration: none; color:#004d99;"
+                                    href="#" target="_blank">
+                                    meetresume.pdf
+                                </a></p>
+                            <input type="file" class="form-control mt-1" id="resume" name="resume" accept=".pdf">
+                            <p class="text-muted text-center mt-2">You can upload a new resume to replace the current
+                                one.</p>
+                           
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </div>
+            </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

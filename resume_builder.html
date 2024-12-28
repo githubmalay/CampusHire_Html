@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Maker</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+   
+
+    #resumeForm {
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
+
+    .form-control-lg {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .btn {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            border-radius: 20px;
+        }
+
+        .resume {
+    padding: 10px;
+    /* background-color: #fff; */
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* border-radius: 8px; */
+}
+
+        .resume h2 {
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .resume .section {
+            margin-bottom: 20px;
+        }
+
+        .resume .section h4 {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            color: #007bff;
+            font-size: 20px;
+        }
+
+        .resume p {
+            margin: 0;
+            line-height: 1.8;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        .resume a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .resume a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, .075);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+
+        }
+
+        @media (max-width: 576px) {
+            .form-group {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media print {
+            .btn-custom,
+            .btn-secondary,
+            .btn-success {
+                display: none;
+            }
+        }
+
+        .resume-section {
+            display: none;
+        }
+
+        #resumeForm {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 7px;
+            border: 1px solid #ccc;
+            padding: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn-custom {
+            background-color: #0066cc;
+            border-color: #007bff;
+            font-size: 18px;
+            /* padding: 10px 20px; */
+            border-radius: 5px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-custom:hover,
+        .btn-custom:focus {
+            background-color: #0056b3;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background-color: #5a6268;
+            box-shadow: 0 0 10px rgba(108, 117, 125, 0.5);
+        }
+
+        .form-row {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-center {
+            margin-top: 20px;
+            color: #0066cc;
+        }
+h2{
+    color: #007bff;
+
+}
+        @media (max-width: 576px) {
+            #resumeForm {
+                padding: 15px;
+            }
+
+            .form-control {
+                font-size: 14px;
+            }
+
+            .btn-custom,
+            .btn-secondary {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark px-3">
+    <a class="navbar-brand text-light" href="homepage.html">CampusHire</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user text-light"></i> Meet Ladola
+                    </a>
+                    <div class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="profile_view.html"><i class="fas fa-user"></i> Profile</a>
+                        <a class="dropdown-item" href="resume_builder.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+                        <a class="dropdown-item" href="student_application_history.html"><i class="fas fa-history"></i> Application history </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="index.html">Logout <i class="fa-solid fa-sign-out-alt"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluied mb-4 mt-4">
+    <form id="resumeForm" class="px-4 shadow-lg rounded bg-white mx-auto" style="max-width: 800px;">
+
+    <h2 class="text-center mb-4 text-primary">Resume Builder</h2>
+
+    <!-- Name and Email -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control form-control-lg" id="name" placeholder="John Doe" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control form-control-lg" id="email" placeholder="john.doe@example.com" required>
+        </div>
+    </div>
+
+    <!-- Phone and City -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control form-control-lg" id="phone" placeholder="+1 234 567 890" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control form-control-lg" id="city" placeholder="City Name">
+        </div>
+    </div>
+
+    <!-- Portfolio URL -->
+    <div class="mb-3">
+        <label for="portfolio" class="form-label">Portfolio URL</label>
+        <input type="url" class="form-control form-control-lg" id="portfolio" placeholder="https://portfolio.example.com">
+    </div>
+
+    <!-- Education -->
+    <div class="mb-3">
+        <label for="education" class="form-label">Education</label>
+        <textarea class="form-control form-control-lg" id="education" rows="2" placeholder="B.Sc. in Computer Science, XYZ University, 2020"></textarea>
+    </div>
+
+    <!-- Experience and Skills -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="experience" class="form-label">Experience</label>
+            <textarea class="form-control form-control-lg" id="experience" rows="2" placeholder="Software Engineer at ABC Corp, 2021-Present"></textarea>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="skills" class="form-label">Skills</label>
+            <textarea class="form-control form-control-lg" id="skills" rows="2" placeholder="JavaScript, Python, React, Node.js"></textarea>
+        </div>
+    </div>
+
+    <!-- Projects and Certifications -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="projects" class="form-label">Projects</label>
+            <textarea class="form-control form-control-lg" id="projects" rows="2" placeholder="Portfolio Website, E-commerce Platform"></textarea>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="certifications" class="form-label">Certifications</label>
+            <textarea class="form-control form-control-lg" id="certifications" rows="2" placeholder="Certified Java Developer, AWS Certified Architect"></textarea>
+        </div>
+    </div>
+
+    <!-- Training and Personal Projects -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="training" class="form-label">Training & Courses</label>
+            <textarea class="form-control form-control-lg" id="training" rows="2" placeholder="Machine Learning Specialization, Coursera, 2021"></textarea>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="personalProjects" class="form-label">Personal Project Links</label>
+            <textarea class="form-control form-control-lg" id="personalProjects" rows="2" placeholder="https://github.com/username/project1"></textarea>
+        </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg px-4 py-2 mb-2">Generate Resume</button>
+        <button type="reset" class="btn btn-secondary btn-lg px-4 py-2 mb-2">Reset</button>
+    </div>
+</form>
+
+<!-- Add custom styling for a cleaner look -->
+
+        
+        <div class="modal fade" id="resumeModal" tabindex="1" role="dialog" aria-labelledby="resumeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="resume">
+                            <h2 id="resumeNameModal"></h2>
+                            <p><strong>Email:</strong> <span id="resumeEmailModal"></span></p>
+                            <p><strong>Phone:</strong> <span id="resumePhoneModal"></span></p>
+                            <p><strong>City:</strong> <span id="resumeCityModal"></span></p>
+                            <div class="section resume-section" id="portfolioSectionModal">
+                                <p><strong>Portfolio:</strong> <a id="resumePortfolioModal" href="#" target="_blank"></a></p>
+                            </div>
+                            <div class="section resume-section" id="educationSectionModal">
+                                <h4>Education</h4>
+                                <p id="resumeEducationModal"></p>
+                            </div>
+                            <div class="section resume-section" id="experienceSectionModal">
+                                <h4>Experience</h4>
+                                <p id="resumeExperienceModal"></p>
+                            </div>
+                            <div class="section resume-section" id="skillsSectionModal">
+                                <h4>Skills</h4>
+                                <p id="resumeSkillsModal"></p>
+                            </div>
+                            <div class="section resume-section" id="projectsSectionModal">
+                                <h4>Projects</h4>
+                                <p id="resumeProjectsModal"></p>
+                            </div>
+                            <div class="section resume-section" id="certificationsSectionModal">
+                                <h4>Certifications</h4>
+                                <p id="resumeCertificationsModal"></p>
+                            </div>
+                            <div class="section resume-section" id="trainingSectionModal">
+                                <h4>Training & Courses</h4>
+                                <p id="resumeTrainingModal"></p>
+                            </div>
+                            <div class="section resume-section" id="personalProjectsSectionModal">
+                                <h4>Personal Project Links</h4>
+                                <p id="resumePersonalProjectsModal"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="downloadPdfModal">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+        <script>
+            document.getElementById('resumeForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const city = document.getElementById('city').value;
+                const portfolio = document.getElementById('portfolio').value;
+                const education = document.getElementById('education').value;
+                const experience = document.getElementById('experience').value;
+                const skills = document.getElementById('skills').value;
+                const projects = document.getElementById('projects').value;
+                const certifications = document.getElementById('certifications').value;
+                const training = document.getElementById('training').value;
+                const personalProjects = document.getElementById('personalProjects').value;
+
+                // Set modal content
+                document.getElementById('resumeNameModal').textContent = name;
+                document.getElementById('resumeEmailModal').textContent = email;
+                document.getElementById('resumePhoneModal').textContent = phone;
+                document.getElementById('resumeCityModal').textContent = city;
+
+                const portfolioLinkModal = document.getElementById('resumePortfolioModal');
+                if (portfolio) {
+                    portfolioLinkModal.href = portfolio;
+                    portfolioLinkModal.textContent = portfolio;
+                } else {
+                    portfolioLinkModal.href = '#';
+                    portfolioLinkModal.textContent = 'No Portfolio Provided';
+                }
+
+                // Show or hide sections based on content
+                const sections = {
+                    portfolio: 'portfolioSectionModal',
+                    education: 'educationSectionModal',
+                    experience: 'experienceSectionModal',
+                    skills: 'skillsSectionModal',
+                    projects: 'projectsSectionModal',
+                    certifications: 'certificationsSectionModal',
+                    training: 'trainingSectionModal',
+                    personalProjects: 'personalProjectsSectionModal'
+                };
+
+                Object.keys(sections).forEach(key => {
+                    const section = document.getElementById(sections[key]);
+                    const content = document.getElementById(`resume${key.charAt(0).toUpperCase() + key.slice(1)}Modal`);
+                    if (eval(key)) {
+                        content.textContent = eval(key);
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+
+                // Show modal
+                $('#resumeModal').modal('show');
+            });
+
+            document.getElementById('resumeForm').addEventListener('reset', function (event) {
+                $('#resumeModal').modal('hide');
+            });
+
+            document.getElementById('downloadPdfModal').addEventListener('click', function () {
+                const element = document.querySelector('#resumeModal .modal-body .resume');
+                html2pdf().from(element).set({
+                    margin: [10, 10, 10, 10],
+                    filename: 'resume.pdf',
+                    image: { type: 'pdf', quality: 1.0 },
+                    html2canvas: { scale: 3, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    enableLinks: true
+                }).save();
+            });
+        </script>
+    </div>
+</body>
+
+</html>
